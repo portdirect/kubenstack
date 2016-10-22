@@ -41,7 +41,8 @@ RUN apk add --no-cache --virtual build-deps \
     apk del build-deps
 
 
-ADD ./assets /opt/harbor/assets
+
+COPY ./assets /opt/harbor/assets
 
 RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets

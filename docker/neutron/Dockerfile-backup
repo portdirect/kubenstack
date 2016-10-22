@@ -92,7 +92,7 @@ RUN mkdir -p /opt/stack && \
     yum clean all
 
 
-ADD ./assets /opt/harbor/assets
+COPY ./assets /opt/harbor/assets
 
 RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets && \

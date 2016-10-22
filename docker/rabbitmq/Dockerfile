@@ -3,8 +3,6 @@ FROM %%DOCKER_NAMESPACE%%/%%DOCKER_PREFIX%%base:%%DOCKER_TAG%%
 ENV OS_COMP="rabbitmq" \
     RABBITMQ_VERSION=3.6.1
 
-ADD ./assets /opt/harbor/assets
-
 # Setup Erlang, download RabbitMQ and setup the management plugin
 RUN apk add --no-cache --virtual run-deps \
         erlang \
@@ -31,7 +29,7 @@ RUN apk add --no-cache --virtual run-deps \
     mkdir -p /data/rabbitmq && \
     chown -R rabbitmq:rabbitmq /data/rabbitmq
 
-
+COPY ./assets /opt/harbor/assets
 
 RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets

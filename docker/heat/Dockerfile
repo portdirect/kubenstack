@@ -4,7 +4,6 @@ ENV OS_COMP="heat" \
     OS_REPO_URL="https://github.com/openstack/heat.git" \
     OS_REPO_BRANCH="master"
 
-ADD ./assets /opt/harbor/assets
 
 RUN apk add --no-cache --virtual mnanagement-deps  \
         mariadb-client \
@@ -34,6 +33,9 @@ RUN apk add --no-cache --virtual mnanagement-deps  \
     mkdir -p /var/log/${OS_COMP} && \
     addgroup ${OS_COMP} -g 1000 && \
     adduser -u 1000 -D -s /bin/false -G ${OS_COMP} ${OS_COMP} && \
-    chown -R ${OS_COMP}:${OS_COMP} /var/log/${OS_COMP} && \
-    cp -rf /opt/harbor/assets/* / && \
+    chown -R ${OS_COMP}:${OS_COMP} /var/log/${OS_COMP}
+
+COPY ./assets /opt/harbor/assets
+
+RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets

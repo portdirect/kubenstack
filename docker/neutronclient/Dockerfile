@@ -2,7 +2,7 @@ FROM %%DOCKER_NAMESPACE%%/%%DOCKER_PREFIX%%base:%%DOCKER_TAG%%
 
 ENV OS_COMP="neutronclient"
 
-ADD ./assets /opt/harbor/assets
+COPY ./assets /opt/harbor/assets
 
 RUN apk add --no-cache --virtual build-deps \
         gcc \

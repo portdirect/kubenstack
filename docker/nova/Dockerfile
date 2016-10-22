@@ -54,7 +54,7 @@ RUN cat /etc/apk/repositories && \
     chown -R ${OS_COMP}:${OS_COMP} /var/log/${OS_COMP} && \
     chown -R ${OS_COMP}:${OS_COMP} /var/lib/${OS_COMP}
 
-ADD ./assets /opt/harbor/assets
+COPY ./assets /opt/harbor/assets
 
 RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets && \

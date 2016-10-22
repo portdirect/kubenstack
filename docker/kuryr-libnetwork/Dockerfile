@@ -39,7 +39,7 @@ ENV SERVICE_USER="admin" \
     PROCESSES=2 \
     THREADS=2
 
-ADD ./assets /opt/harbor/assets
+COPY ./assets /opt/harbor/assets
 
 RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets

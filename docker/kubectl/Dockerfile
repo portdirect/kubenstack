@@ -3,8 +3,6 @@ FROM %%DOCKER_NAMESPACE%%/%%DOCKER_PREFIX%%base:%%DOCKER_TAG%%
 ENV OS_COMP="kubectl" \
     KUBE_VERSION="v1.3.6"
 
-ADD ./assets /opt/harbor/assets
-
 RUN apk add --no-cache --virtual build-deps \
         curl && \
     mkdir -p /usr/bin && \
@@ -14,6 +12,9 @@ RUN apk add --no-cache --virtual build-deps \
     mkdir -p /var/log/${OS_COMP} && \
     addgroup ${OS_COMP} -g 1000 && \
     adduser -u 1000 -D -s /bin/false -G ${OS_COMP} ${OS_COMP} && \
-    chown -R ${OS_COMP}:${OS_COMP} /var/log/${OS_COMP} && \
-    cp -rf /opt/harbor/assets/* / && \
+    chown -R ${OS_COMP}:${OS_COMP} /var/log/${OS_COMP}
+
+COPY ./assets /opt/harbor/assets
+
+RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets

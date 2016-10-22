@@ -19,7 +19,7 @@ RUN apk add --no-cache --virtual build-deps \
     adduser -u 1000 -D -s /bin/false -G ${OS_COMP} ${OS_COMP} && \
     chown -R ${OS_COMP}:${OS_COMP} /var/log/${OS_COMP}
 
-ADD ./assets /opt/harbor/assets
+COPY ./assets /opt/harbor/assets
 
 RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets

@@ -46,18 +46,6 @@ RUN yum install -y \
         openssl-devel && \
     yum clean all
 
-ENV OS_COMP="neutron" \
-    OS_REPO_URL="https://github.com/openstack/neutron.git" \
-    OS_REPO_BRANCH="master" \
-    OS_REPO_COMMIT="f7ec19ad0138a44d5e9d0e539aa7f8066d3d09b0" \
-    OS_COMP_1="networking-ovn" \
-    OS_REPO_URL_1="https://github.com/openstack/networking-ovn.git" \
-    OS_REPO_BRANCH_1="master" \
-    OS_COMP_2="neutron-lbass" \
-    OS_REPO_URL_2="https://github.com/openstack/neutron-lbaas.git" \
-    OS_REPO_BRANCH_2="master"
-
-
 RUN mkdir -p /opt/stack && \
     pip --no-cache-dir install --upgrade pip setuptools && \
     pip --no-cache-dir install crudini && \
@@ -94,7 +82,7 @@ RUN mkdir -p /opt/stack && \
     yum clean all
 
 
-ADD ./assets /opt/harbor/assets
+COPY ./assets /opt/harbor/assets
 
 RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets && \
