@@ -10,8 +10,6 @@ ENV OS_COMP="nova" \
 RUN cat /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --no-cache --virtual run-deps  \
-        py-numpy \
-        py-xattr \
         libxml2 \
         libxslt \
         libldap \
