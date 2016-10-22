@@ -3,6 +3,14 @@ FROM alpine:latest
 ENV OS_DISTRO="HarborDev"
 
 RUN cat /etc/apk/repositories > /etc/apk/repositories.bak && \
+    apk add --no-cache --virtual core-deps \
+        python \
+        sudo \
+        curl && \
+        chmod 0640 /etc/sudoers && \
+        sed -i '/Defaults    requiretty/s/^/#/' /etc/sudoers && \
+        chmod 0440 /etc/sudoers && \
+        python -m ensurepip && \
     apk add --no-cache --virtual build-deps1 \
         gcc \
         git \
@@ -40,15 +48,7 @@ RUN cat /etc/apk/repositories > /etc/apk/repositories.bak && \
         libxml2 \
         libxslt \
         libcurl \
-        openssl \
-    apk add --no-cache --virtual core-deps \
-        python \
-        sudo \
-        curl && \
-    chmod 0640 /etc/sudoers && \
-    sed -i '/Defaults    requiretty/s/^/#/' /etc/sudoers && \
-    chmod 0440 /etc/sudoers && \
-    python -m ensurepip && \
+        openssl && \
     pip --no-cache-dir install --upgrade pip setuptools && \
     pip install crudini && \
     pip install PyMySQL===0.7.5 && \
