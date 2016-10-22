@@ -7,8 +7,6 @@ ENV OS_COMP="glance" \
 RUN cat /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --no-cache --virtual run-deps  \
-        py-numpy \
-        py-xattr \
         libxml2 \
         libxslt \
         libldap \
@@ -41,7 +39,7 @@ RUN cat /etc/apk/repositories && \
     adduser -u 1000 -D -s /bin/false -G ${OS_COMP} ${OS_COMP} && \
     chown -R ${OS_COMP}:${OS_COMP} /var/log/${OS_COMP}
 
-ADD ./assets /opt/harbor/assets
+COPY ./assets /opt/harbor/assets
 
 RUN cp -rf /opt/harbor/assets/* / && \
     rm -rf /opt/harbor/assets
