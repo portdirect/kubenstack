@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block html_element %}
+<html class="login-pf">
+<!--
+                    __        __ _                 __
+   ___  ___   ____ / /_   ___/ /(_)____ ___  ____ / /_
+  / _ \/ _ \ / __// __/_ / _  // // __// -_)/ __// __/
+ / .__/\___//_/   \__/(_)\_,_//_//_/   \__/ \__/ \__/
+/_/
+
+The api is probably the best place to start fuzzing...
+     ...unless we have it really wrong!
+-->
+{% endblock %}
+
+{% block title %}{% trans "Login" %}{% endblock %}
+
+{% block body_id %}splash{% endblock %}
+
+{% block content %}
+  {% include 'auth/_login.html' %}
+{% endblock %}
+
+{% block footer %}
+  {% include '_login_footer.html' %}
+{% endblock %}
